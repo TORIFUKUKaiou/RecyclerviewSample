@@ -21,31 +21,46 @@
  */
 package jp.torifuku.net;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Rect;
-
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
- * BitmapDownloader
+ * Downloader
  */
-public class BitmapDownloader extends Downloader<Bitmap> {
+public abstract class Downloader<T> {
 
-    private static final BitmapDownloader INSTANCE = new BitmapDownloader();
+    protected abstract T convert(InputStream is);
 
-    private BitmapDownloader() {
-    }
-
-    @Override
-    protected Bitmap convert(InputStream is) {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inPreferredConfig = Bitmap.Config.RGB_565;
-        options.inSampleSize = 1;
-        return BitmapFactory.decodeStream(is, new Rect(), options);
-    }
-
-    public static Bitmap download(String urlString) {
-        return INSTANCE.get(urlString);
+    public T get(String urlString) {
+        HttpURLConnection urlConnection = null;
+        InputStream is = null;
+        try {
+            URL url = new URL(urlString);
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.connect();
+            if (urlConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                return null;
+            }
+            is = urlConnection.getInputStream();
+            return convert(is);
+        } catch (MalformedURLException e) {
+            return null;
+        } catch (IOException e) {
+            return null;
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+        }
     }
 }
