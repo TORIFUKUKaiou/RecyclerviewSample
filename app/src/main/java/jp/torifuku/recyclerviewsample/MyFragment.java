@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.torifuku.model.Data;
-import jp.torifuku.ui.MyAdapter;
+import jp.torifuku.recyclerviewsample.model.Data;
+import jp.torifuku.ui.TorifukuAdapter;
 
 /**
  * MyFragment
@@ -38,7 +38,7 @@ public class MyFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dataList = getArguments().getParcelableArrayList(KEY);
-        adapter = new MyAdapter(dataList, R.layout.item, R.id.imageView, R.id.textView, R.drawable.empty_photo, getResources());
+        adapter = new TorifukuAdapter(dataList, R.layout.item, R.id.imageView, R.id.textView, R.drawable.empty_photo, getResources());
     }
 
     @Override

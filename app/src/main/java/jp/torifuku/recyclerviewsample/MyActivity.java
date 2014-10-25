@@ -11,7 +11,7 @@ import com.example.android.displayingbitmaps.provider.Images;
 
 import java.util.ArrayList;
 
-import jp.torifuku.model.Data;
+import jp.torifuku.recyclerviewsample.model.Data;
 
 
 public class MyActivity extends Activity {

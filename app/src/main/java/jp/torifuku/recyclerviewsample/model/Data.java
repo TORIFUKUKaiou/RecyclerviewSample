@@ -1,14 +1,14 @@
-package jp.torifuku.model;
+package jp.torifuku.recyclerviewsample.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import jp.torifuku.ui.MyAdapter;
+import jp.torifuku.ui.TorifukuAdapter;
 
 /**
  * Data
  */
-public class Data implements MyAdapter.AdapterData, Parcelable {
+public class Data implements TorifukuAdapter.AdapterData, Parcelable {
     private String title;
     private String url;
 

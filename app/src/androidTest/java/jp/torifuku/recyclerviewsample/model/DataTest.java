@@ -1,4 +1,4 @@
-package jp.torifuku.model;
+package jp.torifuku.recyclerviewsample.model;
 
 import junit.framework.TestCase;
 
