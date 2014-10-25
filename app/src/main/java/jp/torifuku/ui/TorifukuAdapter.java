@@ -21,6 +21,7 @@
  */
 package jp.torifuku.ui;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -39,7 +40,8 @@ public class TorifukuAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     public interface AdapterData {
         String getTitle();
-        String getUrl();
+        String getThumbnailUrl();
+        void doAction(Context context);
     }
 
     private List<? extends AdapterData> dataList;
@@ -68,6 +70,12 @@ public class TorifukuAdapter extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         final AdapterData data = dataList.get(position);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data.doAction(v.getContext());
+            }
+        });
         viewHolder.getTextView().setText(data.getTitle());
         loadBitmap(data, viewHolder.getImageView());
     }

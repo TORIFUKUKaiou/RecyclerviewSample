@@ -18,7 +18,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-Includes com.example.android.displayingbitmaps.provider.Images
+Includes
+com.example.android.displayingbitmaps.provider.Images
+res/drawable/photogrid_list_selector
+res/drawable-nodipi/empty_photo.png
+res/values/colors.xml
 http://developer.android.com/training/displaying-bitmaps/index.html
 Copyright (C) 2012 The Android Open Source Project
 Licensed under the Apache License, Version 2.0 (the "License");

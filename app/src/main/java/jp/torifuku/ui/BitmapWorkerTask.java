@@ -50,7 +50,7 @@ public class BitmapWorkerTask extends AsyncTask<TorifukuAdapter.AdapterData, Voi
     @Override
     protected Bitmap doInBackground(TorifukuAdapter.AdapterData... params) {
         data = params[0];
-        return BitmapDownloader.download(data.getUrl());
+        return BitmapDownloader.download(data.getThumbnailUrl());
     }
 
     // Once complete, see if ImageView is still around and set bitmap.

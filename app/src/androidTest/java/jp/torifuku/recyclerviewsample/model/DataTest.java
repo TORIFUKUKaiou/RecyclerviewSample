@@ -5,12 +5,12 @@ import junit.framework.TestCase;
 public class DataTest extends TestCase {
 
     public void testGetTitle() throws Exception {
-        Data data = new Data("title", "url");
+        Data data = new Data("title", "thumbnail", "hogehoge");
         assertEquals("getTitle", "title", data.getTitle());
     }
 
-    public void testGetUrl() throws Exception {
-        Data data = new Data("title", "url");
-        assertEquals("getUrl", "url", data.getUrl());
+    public void testGetThumbnailUrl() throws Exception {
+        Data data = new Data("title", "thumbnail", "hogehoge");
+        assertEquals("getThumbnailUrl", "thumbnail", data.getThumbnailUrl());
     }
 }

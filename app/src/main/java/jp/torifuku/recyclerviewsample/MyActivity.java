@@ -26,7 +26,7 @@ public class MyActivity extends Activity {
                 protected ArrayList<Data> doInBackground(Void... params) {
                     ArrayList<Data> result = new ArrayList<Data>();
                     for (int i = 0; i < Images.imageThumbUrls.length; i++) {
-                        result.add(new Data("title"+i, Images.imageThumbUrls[i]));
+                        result.add(new Data("title"+i, Images.imageThumbUrls[i], Images.imageUrls[i]));
                     }
                     return result;
                 }

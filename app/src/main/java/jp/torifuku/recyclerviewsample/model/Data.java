@@ -1,7 +1,9 @@
 package jp.torifuku.recyclerviewsample.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.Toast;
 
 import jp.torifuku.ui.TorifukuAdapter;
 
@@ -10,10 +12,12 @@ import jp.torifuku.ui.TorifukuAdapter;
  */
 public class Data implements TorifukuAdapter.AdapterData, Parcelable {
     private String title;
+    private String thumbnailUrl;
     private String url;
 
-    public Data(String title, String url) {
+    public Data(String title, String thumbnailUrl, String url) {
         this.title = title;
+        this.thumbnailUrl = thumbnailUrl;
         this.url = url;
     }
 
@@ -23,8 +27,13 @@ public class Data implements TorifukuAdapter.AdapterData, Parcelable {
     }
 
     @Override
-    public String getUrl() {
-        return url;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    @Override
+    public void doAction(Context context) {
+        Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -35,7 +44,7 @@ public class Data implements TorifukuAdapter.AdapterData, Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
-        dest.writeString(url);
+        dest.writeString(thumbnailUrl);
     }
 
     public static final Parcelable.Creator<Data> CREATOR
@@ -51,6 +60,6 @@ public class Data implements TorifukuAdapter.AdapterData, Parcelable {
 
     private Data(Parcel in) {
         title = in.readString();
-        url = in.readString();
+        thumbnailUrl = in.readString();
     }
 }
