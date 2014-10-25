@@ -1,11 +1,10 @@
 package jp.torifuku.recyclerviewsample.model;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import jp.torifuku.recyclerviewsample.ImageDetailActivity;
+import jp.torifuku.recyclerviewsample.DetailViewProxy;
 import jp.torifuku.ui.TorifukuAdapter;
 
 /**
@@ -34,10 +33,8 @@ public class Data implements TorifukuAdapter.AdapterData, Parcelable {
 
     @Override
     public void doAction(Context context) {
-        Intent intent = new Intent(context, ImageDetailActivity.class);
-        intent.putExtra(ImageDetailActivity.KEY_URL, url);
-        context.startActivity(intent);
-
+        DetailViewProxy detailViewProxy = new DetailViewProxy();
+        detailViewProxy.startDetailView(context, url);
     }
 
     @Override
