@@ -1,10 +1,11 @@
 package jp.torifuku.recyclerviewsample.model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.widget.Toast;
 
+import jp.torifuku.recyclerviewsample.ImageDetailActivity;
 import jp.torifuku.ui.TorifukuAdapter;
 
 /**
@@ -33,7 +34,10 @@ public class Data implements TorifukuAdapter.AdapterData, Parcelable {
 
     @Override
     public void doAction(Context context) {
-        Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(context, ImageDetailActivity.class);
+        intent.putExtra(ImageDetailActivity.KEY_URL, url);
+        context.startActivity(intent);
+
     }
 
     @Override
