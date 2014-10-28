@@ -1,10 +1,8 @@
 package jp.torifuku.recyclerviewsample.model;
 
-import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import jp.torifuku.recyclerviewsample.DetailViewProxy;
 import jp.torifuku.ui.TorifukuAdapter;
 
 /**
@@ -31,10 +29,8 @@ public class Data implements TorifukuAdapter.AdapterData, Parcelable {
         return thumbnailUrl;
     }
 
-    @Override
-    public void doAction(Context context) {
-        DetailViewProxy detailViewProxy = new DetailViewProxy();
-        detailViewProxy.startDetailView(context, url);
+    public String getUrl() {
+        return url;
     }
 
     @Override

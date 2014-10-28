@@ -24,7 +24,7 @@ public class MyFragment extends Fragment {
     private List<Data> dataList;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private RecyclerView.Adapter<?> adapter;
+    private TorifukuAdapter<Data> adapter;
 
     static Fragment newInstance(ArrayList<Data> list) {
         Fragment f = new MyFragment();
@@ -38,7 +38,14 @@ public class MyFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dataList = getArguments().getParcelableArrayList(KEY);
-        adapter = new TorifukuAdapter(dataList, R.layout.item, R.id.imageView, R.id.textView, R.drawable.empty_photo, getResources());
+        adapter = new TorifukuAdapter<Data>(dataList, R.layout.item, R.id.imageView, R.id.textView, R.drawable.empty_photo, getResources());
+        adapter.setOnClickListener(new TorifukuAdapter.OnClickListener<Data>() {
+            @Override
+            public void onClick(Data data) {
+                DetailViewProxy detailViewProxy = new DetailViewProxy();
+                detailViewProxy.startDetailView(getActivity(), data.getUrl());
+            }
+        });
     }
 
     @Override

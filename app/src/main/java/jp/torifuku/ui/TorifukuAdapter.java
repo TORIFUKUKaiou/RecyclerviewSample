@@ -21,7 +21,6 @@
  */
 package jp.torifuku.ui;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -36,28 +35,36 @@ import java.util.List;
 /**
  * TorifukuAdapter
  */
-public class TorifukuAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class TorifukuAdapter<T extends TorifukuAdapter.AdapterData> extends RecyclerView.Adapter<ViewHolder> {
 
     public interface AdapterData {
         String getTitle();
         String getThumbnailUrl();
-        void doAction(Context context);
     }
 
-    private List<? extends AdapterData> dataList;
+    public interface OnClickListener<T> {
+        void onClick(T obj);
+    }
+
+    private List<T> dataList;
     private int layoutId;
     private int imageViewId;
     private int textViewId;
     private final Bitmap PLACEHOLDER_BITMAP;
     private Resources resources;
+    private OnClickListener<T> listener;
 
-    public TorifukuAdapter(List<? extends AdapterData> dataList, int layoutId, int imageViewId, int textViewId, int placeHolderImageId, Resources resources) {
+    public TorifukuAdapter(List<T> dataList, int layoutId, int imageViewId, int textViewId, int placeHolderImageId, Resources resources) {
         this.dataList = dataList;
         this.layoutId = layoutId;
         this.imageViewId = imageViewId;
         this.textViewId = textViewId;
         PLACEHOLDER_BITMAP = BitmapFactory.decodeResource(resources, placeHolderImageId);
         this.resources = resources;
+    }
+
+    public void setOnClickListener(OnClickListener<T> listener) {
+        this.listener = listener;
     }
 
 
@@ -69,11 +76,13 @@ public class TorifukuAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        final AdapterData data = dataList.get(position);
+        final T data = dataList.get(position);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                data.doAction(v.getContext());
+                if (listener != null) {
+                    listener.onClick(data);
+                }
             }
         });
         viewHolder.getTextView().setText(data.getTitle());
